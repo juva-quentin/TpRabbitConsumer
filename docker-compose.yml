@@ -2,6 +2,18 @@ version: '3'
 services:
   mailhog:
     image: mailhog/mailhog
+    networks:
+      - mon_reseau
     ports:
       - "1025:1025"
       - "8025:8025"
+  mon-app-consummer:
+    build: .
+    networks:
+      - mon_reseau
+    depends_on:
+      - mailhog
+
+networks:
+  mon_reseau:
+    external: true
